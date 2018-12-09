@@ -1,7 +1,4 @@
 #!/bin/sh	
-if [ $UID -ne 0 ]; then
-    echo "Superuser privileges are required to run this script."
-fi
 
 echo 'Start adding SWAP space ......';
 dd if=/dev/zero of=/swapfile bs=1024 count=1024k
@@ -13,7 +10,7 @@ echo "/swapfile           swap                    swap    defaults        0 0" >
 echo 'Add SWAP ready!';
 
 apt update
-apt install htop tmux zsh git curl
+apt install htop tmux zsh git curl -y
 
 # ========== add user now ==========
 

@@ -11,9 +11,10 @@ mount --bind /etc/fake_meminfo /proc/meminfo
 echo 'Add SWAP ready!';
 
 apt update
-apt install htop tmux zsh git curl
+apt install htop tmux zsh git curl -y
 
-# add user now 
+# ========== add user now ==========
+
 wget https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-centos.sh
 chmod +x tcp_nanqinlang-rinetd-debianorubuntu.sh
 
