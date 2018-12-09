@@ -3,7 +3,7 @@
 # the new user cant be root
 USER_NAME=test
 USER_HOME=/home/$USER_NAME
-ZSH=$USER_HOME/.oh-my-zsh
+ZSH_HOME=$USER_HOME/.oh-my-zsh
 
 # add swap
 echo 'Start adding SWAP space ......';
@@ -30,7 +30,6 @@ wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/mas
 # wget --no-check-certificate -O ohmyzsh.sh https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
-git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH"
 
 # install tmux, zsh config
 git clone https://github.com/LomotHo/lomot_dotfile.git $USER_HOME/.lomot_dotfile
@@ -52,6 +51,10 @@ echo "******copy new authorized_keys******"
 git clone https://github.com/LomotHo/script4vps.git
 cp $USER_HOME/script4vps/config/authorized_keys $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
+
+git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH_HOME"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-autosuggestions
 
 echo "exec: chsh -s $(which zsh)"
 # su - $USER_NAME <<EOF
