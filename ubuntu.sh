@@ -20,13 +20,14 @@ apt update
 apt install htop vim net-tools tmux zsh git curl -y
 
 # add user
+echo 'Add new user $USER_NAME';
 adduser $USER_NAME
 usermod -G admin $USER_NAME
 cd $USER_HOME
 
 # download script
 wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh 
-wget --no-check-certificate -O ohmyzsh.sh https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+# wget --no-check-certificate -O ohmyzsh.sh https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
 git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH"
@@ -47,9 +48,12 @@ else
   chmod 700 $USER_HOME/.ssh
 fi
 # 复制$USER_HOME/.ssh/authorized_keys
-echo "copy new authorized_keys"
+echo "******copy new authorized_keys******"
 git clone https://github.com/LomotHo/script4vps.git
 cp $USER_HOME/script4vps/config/authorized_keys $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
 
-su - $USER_NAME "chsh -s $(which zsh)"
+echo "exec: chsh -s $(which zsh)"
+# su - $USER_NAME <<EOF
+# chsh -s $(which zsh)
+# EOF
