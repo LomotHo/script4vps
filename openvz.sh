@@ -1,7 +1,7 @@
 #!/bin/sh	
 
 USER_HOME=/root
-ZSH=$USER_HOME/.oh-my-zsh
+ZSH_HOME=$USER_HOME/.oh-my-zsh
 cd $USER_HOME
 
 # add swap
@@ -46,7 +46,7 @@ cp $USER_HOME/script4vps/config/authorized_keys $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
 
 # install zsh
-git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH"
+git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH_HOME"
 echo "run bbr.sh & shadowsocks-all.sh"
 chsh -s $(which zsh)
 zsh
