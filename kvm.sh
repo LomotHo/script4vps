@@ -4,6 +4,7 @@ USER_HOME=/root
 ZSH=$USER_HOME/.oh-my-zsh
 cd $USER_HOME
 
+# add swap
 echo 'Start adding SWAP space ......';
 dd if=/dev/zero of=/swapfile bs=1024 count=1024k
 chown root:root /swapfile 
@@ -15,8 +16,7 @@ echo 'Add SWAP ready!';
 
 # install software
 apt update
-# apt install htop vim net-tools tmux zsh git curl -y
-apt install tmux zsh git -y
+apt install htop tmux zsh git curl -y
 
 # download script
 wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh 
@@ -47,4 +47,6 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 
 # install zsh
 git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH"
-exec: chsh -s $(which zsh)
+echo "run bbr.sh & shadowsocks-all.sh"
+chsh -s $(which zsh)
+zsh
