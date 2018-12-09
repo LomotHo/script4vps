@@ -38,17 +38,18 @@ ln -s $USER_HOME/.lomot_dotfile/.tmux.conf $USER_HOME/.tmux.conf
 
 # add ssh key
 # 检查是否存在 $USER_HOME/.ssh
-if [ ! -d "$HOME/.ssh" ]; then
-  echo "no $HOME/.ssh, mkdir $USER_HOME/.ssh, chmod it to 700"
+if [ ! -d "$USER_HOME/.ssh" ]; then
+  echo "no $USER_HOME/.ssh, mkdir $USER_HOME/.ssh, chmod it to 700"
   mkdir $USER_HOME/.ssh
   chmod 700 $USER_HOME/.ssh
 else 
-  echo "$HOME/.ssh existed, chmod it to 700"
+  echo "$USER_HOME/.ssh existed, chmod it to 700"
   chmod 700 $USER_HOME/.ssh
 fi
 # 复制$USER_HOME/.ssh/authorized_keys
 echo "copy new authorized_keys"
-cp ./config/authorized_keys $USER_HOME/.ssh
+git clone https://github.com/LomotHo/script4vps.git
+cp $USER_HOME/script4vps/config/authorized_keys $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
 
 su - $USER_NAME "chsh -s $(which zsh)"
