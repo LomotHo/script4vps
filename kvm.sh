@@ -2,6 +2,7 @@
 
 USER_HOME=/root
 ZSH=$USER_HOME/.oh-my-zsh
+cd $USER_HOME
 
 echo 'Start adding SWAP space ......';
 dd if=/dev/zero of=/swapfile bs=1024 count=1024k
