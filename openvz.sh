@@ -14,32 +14,11 @@ apt update
 apt install htop tmux zsh git curl
 
 # add user now 
-
-wget https://raw.githubusercontent.com/kuoruan/shell-scripts/master/ovz-bbr/ovz-bbr-installer.sh
-chmod +x ovz-bbr-installer.sh
+wget https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-centos.sh
+chmod +x tcp_nanqinlang-rinetd-debianorubuntu.sh
 
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x shadowsocks-all.sh
-
-# # add ssh key
-# # 检查是否存在 ~/.ssh
-# if [ ! -d "$HOME/.ssh" ]; then
-#   echo "no $HOME/.ssh, mkdir ~/.ssh, chmod it to 700"
-#   mkdir ~/.ssh
-#   chmod 700 ~/.ssh
-# else 
-#   echo "$HOME/.ssh existed, chmod it to 700"
-#   chmod 700 ~/.ssh
-# fi
-# # 检查是否存在 ~/.ssh/authorized_keys
-# if [ -f "$HOME/.ssh/authorized_keys" ]; then
-#   echo "$HOME/.ssh/authorized_keys existed, move it to authorized_keys.orign"
-#   mv ~/.ssh/authorized_keys ~/.ssh/authorized_keys.orign
-# fi
-# # 复制~/.ssh/authorized_keys
-# echo "copy new authorized_keys"
-# cp ./config/authorized_keys ~/.ssh
-# chmod 600 ~/.ssh/authorized_keys
 
 # # add ssh key
 mkdir ~/.ssh
