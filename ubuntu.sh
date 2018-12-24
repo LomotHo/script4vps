@@ -22,7 +22,7 @@ apt install htop vim net-tools tmux zsh git curl -y
 # add user
 echo 'Add new user $USER_NAME';
 adduser $USER_NAME
-usermod -G admin $USER_NAME
+usermod -aG sudo $USER_NAME
 cd $USER_HOME
 
 # download script
@@ -56,6 +56,8 @@ git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH_HOME"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-autosuggestions
 
+chown -R $USER_NAME:$USER_NAME $USER_HOME/*
+chown -R $USER_NAME:$USER_NAME $USER_HOME/.*
 echo "exec: chsh -s $(which zsh)"
 # su - $USER_NAME <<EOF
 # chsh -s $(which zsh)
