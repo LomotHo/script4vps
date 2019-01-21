@@ -20,7 +20,8 @@ apt update
 apt install htop tmux zsh git curl -y
 
 # download script
-wget --no-check-certificate -O rinetd-bbr.sh https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-centos.sh
+wget --no-check-certificate -O tcp_nanqinlang-rinetd-debianorubuntu.sh https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-debianorubuntu.sh
+wget --no-check-certificate -O tcp_nanqinlang-rinetd-centos.sh https://github.com/tcp-nanqinlang/lkl-rinetd/releases/download/1.1.0/tcp_nanqinlang-rinetd-centos.sh
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
 
