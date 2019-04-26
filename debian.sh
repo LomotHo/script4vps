@@ -17,7 +17,7 @@ echo 'Add SWAP ready!';
 
 # install software
 apt update
-apt install htop vim net-tools tmux zsh git curl -y
+apt install sudo htop vim net-tools tmux zsh git curl -y
 
 # add user
 echo 'Add new user $USER_NAME';
@@ -26,7 +26,7 @@ usermod -aG sudo $USER_NAME
 cd $USER_HOME
 
 # download script
-wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh 
+wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
 # wget --no-check-certificate -O ohmyzsh.sh https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
