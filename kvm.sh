@@ -1,4 +1,4 @@
-#!/bin/sh	
+#!/bin/sh
 
 USER_HOME=/root
 ZSH_HOME=$USER_HOME/.oh-my-zsh
@@ -7,7 +7,7 @@ cd $USER_HOME
 # add swap
 echo 'Start adding SWAP space ......';
 dd if=/dev/zero of=/swapfile bs=1024 count=1024k
-chown root:root /swapfile 
+chown root:root /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -19,7 +19,7 @@ apt update
 apt install htop tmux zsh git curl -y
 
 # download script
-wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh 
+wget --no-check-certificate -O bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
 # wget --no-check-certificate -O ohmyzsh.sh https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
