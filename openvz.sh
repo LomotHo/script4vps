@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# the new user can not be root
-USER_NAME=lomot
-USER_HOME=/home/$USER_NAME
+USER_HOME=/root
 ZSH_HOME=$USER_HOME/.oh-my-zsh
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
@@ -24,7 +22,6 @@ echo 'Add SWAP ready!';
 # install software
 apt update
 apt install htop vim tmux zsh git curl -y
-
 
 
 # download script
