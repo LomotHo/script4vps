@@ -1,8 +1,11 @@
 #!/bin/sh
 
-USER_HOME=/root
+# the new user can not be root
+USER_NAME=lomot
+USER_HOME=/home/$USER_NAME
 ZSH_HOME=$USER_HOME/.oh-my-zsh
-DOT_FILE_HOME=$USER_HOME/.vps_dotfile
+SCRIPT4VPS_HOME=$USER_HOME/.script4vps
+VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 cd $USER_HOME
 
 
@@ -23,12 +26,13 @@ apt update
 apt install htop vim tmux zsh git curl -y
 
 
+
 # download script
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
 chmod +x $USER_HOME/*.sh
 git clone https://github.com/cx9208/Linux-NetSpeed.git $USER_HOME
-git clone https://github.com/LomotHo/script4vps.git $USER_HOME
-cp -r $USER_HOME/script4vps/dotfile $DOT_FILE_HOME
+git clone https://github.com/LomotHo/script4vps.git $SCRIPT4VPS_HOME
+# cp -r $USER_HOME/script4vps/dotfile $DOT_FILE_HOME
 
 
 # add ssh key
@@ -42,7 +46,7 @@ else
   chmod 700 $USER_HOME/.ssh
 fi
 echo "******copy new authorized_keys******"
-cp $USER_HOME/script4vps/config/authorized_keys $USER_HOME/.ssh
+cp $VPS_CONFIG_HOME/authorized_keys $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
 
 
@@ -50,7 +54,9 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH_HOME"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-syntax-highlighting
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-autosuggestions
-ln -s $DOT_FILE_HOME/vps.zshrc $USER_HOME/.zshrc
-ln -s $DOT_FILE_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
+ln -s $VPS_CONFIG_HOME/vps.zshrc $USER_HOME/.zshrc
+ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
+
+
 chsh -s $(which zsh)
 zsh
