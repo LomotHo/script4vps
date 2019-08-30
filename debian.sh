@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# the new user cant be root
+# the new user can not be root
 USER_NAME=lomot
 USER_HOME=/home/$USER_NAME
 ZSH_HOME=$USER_HOME/.oh-my-zsh
