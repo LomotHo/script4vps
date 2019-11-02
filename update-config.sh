@@ -1,3 +1,5 @@
+#!/bin/sh
+
 rm ~/.tmux.conf
 rm ~/.zshrc
 rm ~/.vimrc
