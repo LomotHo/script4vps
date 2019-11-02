@@ -54,6 +54,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH_HOME/custom}/plugins/zsh-autosuggestions
 ln -s $VPS_CONFIG_HOME/vps.zshrc $USER_HOME/.zshrc
 ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
+ln -s ~/.script4vps/config/vps.vimrc ~/.vimrc
 
 
 chsh -s $(which zsh)
