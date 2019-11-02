@@ -1,5 +1,6 @@
 #!/bin/sh
 
+git pull
 rm ~/.tmux.conf
 rm ~/.zshrc
 rm ~/.vimrc
