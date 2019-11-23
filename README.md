@@ -1,5 +1,6 @@
 # script4vps
-please replace the file ```config/authorized_keys``` frist !!!
+please replace the file ```config/authorized_keys``` & ```config/vps.gitconfig``` frist !!!
+
 
 ---
 
