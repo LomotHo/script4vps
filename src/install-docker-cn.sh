@@ -8,7 +8,7 @@ apt-get update
 
 case $OS in
 ubuntu)
-    apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | apt-key add -
     add-apt-repository \
       "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
@@ -16,7 +16,7 @@ ubuntu)
       stable"
     ;;
 debian)
-    apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+    apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
     curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | apt-key add -
     add-apt-repository \
       "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian \
