@@ -1,5 +1,8 @@
 #!/bin/bash
 
+OS=${OS:-$(source /etc/os-release; echo $ID)}
+OS_VERSION=${OS_VERSION:-$(source /etc/os-release; echo $VERSION_ID)}
+
 apt-get remove docker docker-engine docker.io containerd runc
 apt-get update
 

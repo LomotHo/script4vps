@@ -8,6 +8,7 @@ SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 OS=$(source /etc/os-release; echo $ID)
 OS_VERSION=$(source /etc/os-release; echo $VERSION_ID)
+SOURCE_LIST_HOME=${SOURCE_LIST_HOME:-./src/china-source}
 
 # import lib
 source ./src/lib/color-log.sh
@@ -28,9 +29,7 @@ debian)
 esac
 
 # # add swap
-# log-info "add swap"
-# source ./src/addswap/512M.sh
-# log-info "add swap OK"
+# run-script ./src/addswap/512M.sh "add swap"
 
 # install china source
 run-script ./src/install-source.sh "install china source"

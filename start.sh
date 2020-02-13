@@ -28,8 +28,7 @@ debian)
 esac
 
 # # add swap
-# log-info "add swap"
-# source ./src/addswap/512M.sh
+# run-script ./src/addswap/512M.sh "add swap"
 
 # install software
 run-script ./src/install-software.sh "install software"
