@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # the new user can not be root
 USER_NAME=lomot
