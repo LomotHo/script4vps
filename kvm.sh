@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 USER_HOME=/root
 ZSH_HOME=$USER_HOME/.oh-my-zsh

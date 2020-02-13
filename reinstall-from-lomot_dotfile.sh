@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 git clone https://github.com/LomotHo/script4vps.git ~/.script4vps
 rm -rf ~/.lomot_dotfile
