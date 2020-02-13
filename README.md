@@ -18,6 +18,14 @@ cd script4vps
 ./kvm.sh
 ```
 
+### ubuntu or debian
+```bash
+git clone https://github.com/LomotHo/script4vps.git
+cd script4vps
+./start.sh
+# ./start.sh -cn
+```
+
 ### reinstall from lomot_dotfile
 ```bash
 git clone https://github.com/LomotHo/script4vps.git ~/.script4vps
