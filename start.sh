@@ -11,6 +11,7 @@ OS_VERSION=$(source /etc/os-release; echo $VERSION_ID)
 
 # import lib
 source ./src/lib/color-log.sh
+source ./src/lib/util.sh
 
 # check OS
 case $OS in
@@ -31,34 +32,24 @@ esac
 # source ./src/addswap/512M.sh
 
 # install software
-log-info "install software"
-source ./src/install-software.sh
+run-script ./src/install-software.sh "install software"
 
 # add user
-log-info "add user: ${USER_NAME}"
-source ./src/add-user.sh
+run-script ./src/add-user.sh "add user: ${USER_NAME}"
 
 # install script4vps
-log-info "install script4vps"
-source ./src/install-script4vps.sh
-
+run-script ./src/install-script4vps.sh "install script4vps"
 
 # download script
-log-info "download scripts"
-source ${SCRIPT4VPS_HOME}/src/download-script.sh
+run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
 
 # add ssh key
-log-info "add ssh key"
-source ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh
+run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
 
 # # install docker
-# log-info "install docker"
-# source ./src/install-docker.sh
+# run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
 
 # chown home
-log-info "chown home"
-source ${SCRIPT4VPS_HOME}/src/chown-home.sh
+run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
 
-log-warning "exec: chsh -s $(which zsh)"
-
-
+log-warn "exec: chsh -s $(which zsh)"

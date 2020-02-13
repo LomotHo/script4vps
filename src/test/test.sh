@@ -18,13 +18,13 @@
 # echo -e "\033[0;37m light_gray \033[0m"
 # echo -e "\033[1;37m white \033[0m"
 log="this is a log string"
-source ./lib/color-log.sh
+# import lib
+source ../lib/color-log.sh
+source ../lib/util.sh
 
-
-
-log-info "${1}"
-log-info "${2}"
-
+# log-info "${1}"
+# log-info "${2}"
+run-script "./output-test.sh" "test"
 # # check OS
 # OS=$(source /etc/os-release; echo $ID)
 # case $OS in
