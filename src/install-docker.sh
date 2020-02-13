@@ -1,5 +1,6 @@
 #!/bin/bash
 
+USER_NAME=${USER_NAME:-lomot}
 OS=${OS:-$(source /etc/os-release; echo $ID)}
 OS_VERSION=${OS_VERSION:-$(source /etc/os-release; echo $VERSION_ID)}
 
@@ -29,5 +30,6 @@ apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 systemctl enable docker
 systemctl start docker
+gpasswd -a $USER_NAME docker
 newgrp docker
 echo "run 'newgrp docker' in usermode"
