@@ -1,4 +1,8 @@
 #!/bin/bash
+#!/bin/bash
+
+USER_NAME=${USER_NAME:-lomot}
+USER_HOME=${USER_HOME:-/home/$USER_NAME}
 
 # download script
 wget -nv --no-check-certificate -O $USER_HOME/shadowsocks-all.sh "https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh"
