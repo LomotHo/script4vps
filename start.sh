@@ -9,53 +9,56 @@ VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 OS=$(source /etc/os-release; echo $ID)
 OS_VERSION=$(source /etc/os-release; echo $VERSION_ID)
 
+# import lib
+source ./src/lib/color-log.sh
+
 # check OS
 case $OS in
 ubuntu)
-    echo "OS is ubuntu"
+    log-info "OS is ubuntu"
     ;;
 debian)
-    echo "OS is debian"
+    log-info "OS is debian"
     ;;
 *)
-    echo "OS not support"
+    log-error "$OS OS not support"
     exit 1
     ;;
 esac
 
-# add swap
+# # add swap
+# log-info "add swap"
 # source ./src/addswap/512M.sh
 
 # install software
+log-info "install software"
 source ./src/install-software.sh
 
 # add user
+log-info "add user: ${USER_NAME}"
 source ./src/add-user.sh
 
+# install script4vps
+log-info "install script4vps"
+source ./src/install-script4vps.sh
+
+
 # download script
-source ./src/download-script.sh
+log-info "download scripts"
+source ${SCRIPT4VPS_HOME}/src/download-script.sh
 
 # add ssh key
-source ./src/add-ssh-key.sh
+log-info "add ssh key"
+source ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh
 
-# install tmux, zsh config
-source ./src/install-config.sh
-
-# install docker
-USER=$USER_NAME
-case $OS in
-ubuntu)
-    source ./src/docker/ubuntu.sh
-    ;;
-debian)
-    source ./src/docker/debian.sh
-    ;;
-esac
+# # install docker
+# log-info "install docker"
+# source ./src/install-docker.sh
 
 # chown home
-chown -R $USER_NAME:$USER_NAME $USER_HOME/*
-chown -R $USER_NAME:$USER_NAME $USER_HOME/.*
+log-info "chown home"
+source ${SCRIPT4VPS_HOME}/src/chown-home.sh
 
-echo "exec: chsh -s $(which zsh)"
+log-warning "exec: chsh -s $(which zsh)"
 
 

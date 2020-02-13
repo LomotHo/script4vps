@@ -1,5 +1,6 @@
 OS=$(source /etc/os-release; echo $ID)
 OS_VERSION=$(source /etc/os-release; echo $VERSION_ID)
+SOURCE_LIST_HOME=${SCRIPT4VPS_HOME}/src/china-source
 
 # install source
 case ${OS} in
@@ -10,7 +11,7 @@ ubuntu)
         cp ${SOURCE_LIST_HOME}/ubuntu${OS_VERSION}.sources.list /etc/apt/sources.list
         ;;
     *)
-        echo "ubuntu"${OS_VERSION}" not support"
+        log-error "ubuntu"${OS_VERSION}" not support"
         ;;
     esac
     ;;
@@ -21,7 +22,7 @@ debian)
         cp ${SOURCE_LIST_HOME}/debian${OS_VERSION}.sources.list /etc/apt/sources.list
         ;;
     *)
-        echo "debian"${OS_VERSION}" not support"
+        log-error "debian"${OS_VERSION}" not support"
         ;;
     esac
     ;;
