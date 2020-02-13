@@ -15,7 +15,7 @@ SOURCE_LIST_HOME=${SOURCE_LIST_HOME:-./china-source}
 case ${OS} in
 ubuntu)
     case ${OS_VERSION} in
-    "18.04"|"16.04")
+    "18.04"|"16.04"|"14.04")
         mv /etc/apt/sources.list /etc/apt/sources.list.ori
         cp ${SOURCE_LIST_HOME}/ubuntu${OS_VERSION}.sources.list /etc/apt/sources.list
         ;;
