@@ -50,7 +50,14 @@ run-script ./src/install-software.sh "install software"
 run-script ./src/add-user.sh "add user: ${USER_NAME}"
 
 # install install ohmyzsh
-run-script ./src/install-ohmyzsh.sh "install ohmyzsh"
+case ${1} in
+"-cn")
+    run-script ./src/install-ohmyzsh-cn.sh "install ohmyzsh"
+    ;;
+*)
+    run-script ./src/install-ohmyzsh.sh "install ohmyzsh"
+    ;;
+esac
 
 # install script4vps
 run-script ./src/install-script4vps.sh "install script4vps"
