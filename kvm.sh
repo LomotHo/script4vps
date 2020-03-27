@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USER_HOME=/root
-OMZ_HOME=$USER_HOME/.oh-my-zsh
+ZINIT_HOME=${ZINIT_HOME:-${USER_HOME}/.zinit}
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 cd $USER_HOME
@@ -47,10 +47,13 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 
 
 # install tmux, zsh config
-git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_HOME"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-syntax-highlighting
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-autosuggestions
-ln -s $VPS_CONFIG_HOME/vps.omz.zshrc $USER_HOME/.zshrc
+# git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_HOME"
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-syntax-highlighting
+# # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-autosuggestions
+# ln -s $VPS_CONFIG_HOME/vps.omz.zshrc $USER_HOME/.zshrc
+mkdir ${ZINIT_HOME}
+git clone https://github.com/zdharma/zinit.git ${ZINIT_HOME}/bin
+ln -s ${VPS_CONFIG_HOME}/vps.zinit.zshrc ${USER_HOME}/.zshrc
 ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
 ln -s $VPS_CONFIG_HOME/vps.vimrc $USER_HOME/.vimrc
 ln -s $VPS_CONFIG_HOME/vps.gitconfig $USER_HOME/.gitconfig
