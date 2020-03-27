@@ -34,6 +34,7 @@ zinit light zdharma/fast-syntax-highlighting
 
 # 加载 OMZ 框架及部分插件
 zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/lib/history.zsh
+zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/lib/completion.zsh
 zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/lib/key-bindings.zsh
 zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/lib/theme-and-appearance.zsh
 zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/lib/grep.zsh
