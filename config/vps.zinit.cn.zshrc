@@ -21,8 +21,8 @@ SCRIPT4VPS_ZSH_SNIPPETS_HOME=~/.script4vps/config/zinit_snippets
 # zinit light skywind3000/z.lua
 
 # 语法高亮
-zinit ice lucid wait='0' atinit='zpcompinit'
-zinit light zdharma/fast-syntax-highlighting
+zinit ice lucid wait='0' atinit='zpcompinit' from "gitee.com"
+zinit light lomot/fast-syntax-highlighting
 
 # 自动建议
 # zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
@@ -48,8 +48,8 @@ zinit ice lucid wait='1'
 zinit snippet ${SCRIPT4VPS_ZSH_SNIPPETS_HOME}/plugins/git/git.plugin.zsh
 
 # 加载 powerlevel10k 主题
-zinit ice depth=1;
-zinit light romkatv/powerlevel10k
+zinit ice depth=1 from "gitee.com";
+zinit light lomot/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
