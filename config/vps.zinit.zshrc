@@ -15,7 +15,7 @@ autoload -Uz _zinit
 USER_HOME=~
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
-SCRIPT4VPS_ZSH_SNIPPETS_HOME=~/.script4vps/config/zinit_snippets
+SCRIPT4VPS_ZSH_SNIPPETS_HOME=${VPS_CONFIG_HOME}/zinit_snippets
 # 快速目录跳转
 # zinit ice lucid wait='1'
 # zinit light skywind3000/z.lua
