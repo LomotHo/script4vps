@@ -54,6 +54,7 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 mkdir ${ZINIT_HOME}
 git clone https://github.com/zdharma/zinit.git ${ZINIT_HOME}/bin
 ln -s ${VPS_CONFIG_HOME}/vps.zinit.zshrc ${USER_HOME}/.zshrc
+ln -s ${VPS_CONFIG_HOME}/vps.p10k.zsh ${USER_HOME}/.p10k.zsh
 ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
 ln -s $VPS_CONFIG_HOME/vps.vimrc $USER_HOME/.vimrc
 ln -s $VPS_CONFIG_HOME/vps.gitconfig $USER_HOME/.gitconfig
