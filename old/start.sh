@@ -3,7 +3,7 @@
 # the new user can not be root
 USER_NAME=lomot
 USER_HOME=/home/$USER_NAME
-ZSH_HOME=$USER_HOME/.oh-my-zsh
+OMZ_HOME=$USER_HOME/.oh-my-zsh
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 OS=$(source /etc/os-release; echo $ID)
