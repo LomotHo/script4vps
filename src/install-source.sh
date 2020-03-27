@@ -2,7 +2,7 @@
 
 USER_NAME=${USER_NAME:-lomot}
 USER_HOME=${USER_HOME:-/home/$USER_NAME}
-ZSH_HOME=${ZSH_HOME:-${USER_HOME}/.oh-my-zsh}
+OMZ_HOME=${OMZ_HOME:-${USER_HOME}/.oh-my-zsh}
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${USER_HOME}/.script4vps}
 VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
 OS=${OS:-$(source /etc/os-release; echo $ID)}

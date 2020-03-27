@@ -3,7 +3,7 @@
 # the new user can not be root
 USER_NAME=lomot
 USER_HOME=/home/$USER_NAME
-ZSH_HOME=$USER_HOME/.oh-my-zsh
+OMZ_HOME=$USER_HOME/.oh-my-zsh
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
 OS=$(source /etc/os-release; echo $ID)
@@ -49,13 +49,23 @@ run-script ./src/install-software.sh "install software"
 # add user
 run-script ./src/add-user.sh "add user: ${USER_NAME}"
 
-# install install ohmyzsh
+# # install install ohmyzsh
+# case ${1} in
+# "-cn")
+#     run-script ./src/install-omz-cn.sh "install ohmyzsh"
+#     ;;
+# *)
+#     run-script ./src/install-omz.sh "install ohmyzsh"
+#     ;;
+# esac
+
+# install install zinit
 case ${1} in
 "-cn")
-    run-script ./src/install-ohmyzsh-cn.sh "install ohmyzsh"
+    run-script ./src/install-zinit-cn.sh "install zinit"
     ;;
 *)
-    run-script ./src/install-ohmyzsh.sh "install ohmyzsh"
+    run-script ./src/install-zinit.sh "install zinit"
     ;;
 esac
 
