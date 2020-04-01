@@ -31,6 +31,16 @@ debian)
     ;;
 esac
 
+# check if $USER is root
+case $USER in
+root)
+    ;;
+*)
+    log-error "please run this script with root"
+    exit 1
+    ;;
+esac
+
 # # add swap
 # run-script ./src/addswap/512M.sh "add swap"
 
