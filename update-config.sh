@@ -2,6 +2,8 @@
 
 source ./src/lib/color-log.sh
 
+log-info "updating script4vps"
+
 git pull
 rm ~/.p10k.zsh
 rm ~/.tmux.conf
