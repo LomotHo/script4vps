@@ -28,6 +28,17 @@ debian)
     ;;
 esac
 
+# check if $USER is root
+case $USER in
+root)
+    ;;
+*)
+    log-error "please run this script with root"
+    exit 1
+    ;;
+esac
+
+
 # # add swap
 # run-script ./src/addswap/512M.sh "add swap"
 
@@ -49,17 +60,7 @@ run-script ./src/install-software.sh "install software"
 # add user
 run-script ./src/add-user.sh "add user: ${USER_NAME}"
 
-# # install install ohmyzsh
-# case ${1} in
-# "-cn")
-#     run-script ./src/install-omz-cn.sh "install ohmyzsh"
-#     ;;
-# *)
-#     run-script ./src/install-omz.sh "install ohmyzsh"
-#     ;;
-# esac
-
-# install install zinit
+# install zinit
 case ${1} in
 "-cn")
     run-script ./src/install-zinit-cn.sh "install zinit"
@@ -78,9 +79,16 @@ run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
 # add ssh key
 run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
 
-# # install docker
-# run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
-# run-script ${SCRIPT4VPS_HOME}/src/install-docker-cn.sh "install docker"
+# install docker
+
+case ${1} in
+"-cn")
+    run-script ${SCRIPT4VPS_HOME}/src/install-docker-cn.sh "install docker"
+    ;;
+*)
+    run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
+    ;;
+esac
 
 # chown home
 run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
