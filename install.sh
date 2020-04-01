@@ -81,14 +81,14 @@ run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
 
 # install docker
 
-case ${1} in
-"-cn")
-    run-script ${SCRIPT4VPS_HOME}/src/install-docker-cn.sh "install docker"
-    ;;
-*)
-    run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
-    ;;
-esac
+# case ${1} in
+# "-cn")
+#     run-script ${SCRIPT4VPS_HOME}/src/install-docker-cn.sh "install docker"
+#     ;;
+# *)
+#     run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
+#     ;;
+# esac
 
 # chown home
 run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
