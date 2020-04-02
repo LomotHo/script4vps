@@ -36,7 +36,7 @@ case $USER in
 root)
     ;;
 *)
-    log-error "please run this script with root"
+    log-error "This script must be run as root!"
     exit 1
     ;;
 esac
