@@ -4,7 +4,7 @@ if [ -f ~/.profile ] ; then
 fi
 
 # alias
-alias qp="git add . && git commit -am 'quick commit' && git push"
+alias qp="git add .; git commit -am 'quick commit'; git push"
 alias dim="docker image"
 alias dco="docker container"
 
@@ -13,7 +13,11 @@ alias dcon="docker container"
 alias datt="docker attach"
 alias drun="docker run"
 # alias dcmp="docker-compose"
-alias dls="docker image ls && docker container ls -a"
+alias dls='docker image ls; \
+    echo "===================================================="; \
+    echo -e "ID\t\tIMAGE\t\t\tNAME\t\tSTATUS"; \
+    docker ps --format "{{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}" '
+
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 
