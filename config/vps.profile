@@ -13,10 +13,14 @@ alias dcon="docker container"
 alias datt="docker attach"
 alias drun="docker run"
 # alias dcmp="docker-compose"
+#alias dls='docker image ls; \
+#    echo "===================================================="; \
+#    echo -e "ID\t\tIMAGE\t\t\tNAME\t\tSTATUS"; \
+#    docker ps --format "{{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}" -a'
 alias dls='docker image ls; \
     echo "===================================================="; \
-    echo -e "ID\t\tIMAGE\t\t\tNAME\t\tSTATUS"; \
-    docker ps --format "{{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}" '
+    docker ps -a'
+
 
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
