@@ -80,7 +80,7 @@ esac
 run-script ./src/install-script4vps.sh "install script4vps"
 
 # download script
-run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
+# run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
 
 # add ssh key
 run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
