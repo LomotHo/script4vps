@@ -88,10 +88,16 @@ run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
 # install docker
 run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
 
-# chown home
-run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
+# # chown home
+# run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
 
+# final work
+log-info "chown home"
+chown -R $USER_NAME:$USER_NAME $USER_HOME/*
+chown -R $USER_NAME:$USER_NAME $USER_HOME/.*
+log-info "chsh"
 sudo -u ${USER_NAME} chsh -s $(which zsh)
+log-info "newgrp docker"
 sudo -u ${USER_NAME} newgrp docker
 
 # log-warn "exec: chsh -s $(which zsh)"
