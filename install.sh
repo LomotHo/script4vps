@@ -7,8 +7,14 @@ ZINIT_HOME=${ZINIT_HOME:-${USER_HOME}/.zinit}
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${USER_HOME}/.script4vps}
 VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
 
-OS=$(source /etc/os-release; echo $ID)
-OS_VERSION=$(source /etc/os-release; echo $VERSION_ID)
+OS=$(
+    source /etc/os-release
+    echo $ID
+)
+OS_VERSION=$(
+    source /etc/os-release
+    echo $VERSION_ID
+)
 SOURCE_LIST_HOME=${SOURCE_LIST_HOME:-./src/china-source}
 
 # import lib
@@ -31,8 +37,8 @@ esac
 
 # check if $USER is root
 case $USER in
-root)
-    ;;
+root) ;;
+
 *)
     log-error "This script must be run as root!"
     exit 1
@@ -85,6 +91,8 @@ run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
 # chown home
 run-script ${SCRIPT4VPS_HOME}/src/chown-home.sh "chown home"
 
-log-warn "exec: chsh -s $(which zsh)"
+sudo -u ${USER_NAME} chsh -s $(which zsh)
+sudo -u ${USER_NAME} newgrp docker
 
-
+# log-warn "exec: chsh -s $(which zsh)"
+# log-warn "exec: newgrp docker"
