@@ -91,4 +91,5 @@ run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
 # final work
 run-script ${SCRIPT4VPS_HOME}/src/final.sh "final work"
 
+cd ${USER_HOME}
 exec su ${USER_NAME}
