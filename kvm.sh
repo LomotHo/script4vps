@@ -1,64 +1,75 @@
 #!/bin/bash
 
+#####################################
+#### kvm2.sh
+#####################################
+
+# the new user can not be root
+USER_NAME=root
 USER_HOME=/root
 ZINIT_HOME=${ZINIT_HOME:-${USER_HOME}/.zinit}
 SCRIPT4VPS_HOME=$USER_HOME/.script4vps
 VPS_CONFIG_HOME=$USER_HOME/.script4vps/config
-cd $USER_HOME
+OS=$(
+    source /etc/os-release
+    echo $ID
+)
+OS_VERSION=$(
+    source /etc/os-release
+    echo $VERSION_ID
+)
 
+# import lib
+source ./src/lib/color-log.sh
+source ./src/lib/util.sh
 
-# add swap
-echo 'Start adding SWAP space ......';
-dd if=/dev/zero of=/swapfile bs=1024 count=1024k
-chown root:root /swapfile
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo "/swapfile           swap                    swap    defaults        0 0" >> /etc/fstab
-echo 'Add SWAP ready!';
+# check OS
+case $OS in
+ubuntu)
+    log-info "OS is ubuntu"
+    ;;
+debian)
+    log-info "OS is debian"
+    ;;
+*)
+    log-error "$OS OS not support"
+    exit 1
+    ;;
+esac
 
+# check if $USER is root
+case $USER in
+root) ;;
+
+*)
+    log-error "This script must be run as root!"
+    exit 1
+    ;;
+esac
+
+# # add swap
+# run-script ./src/addswap/512M.sh "add swap"
 
 # install software
-apt update
-apt install htop vim tmux zsh git curl -y
+run-script ./src/install-software.sh "install software"
 
+# install zinit
+run-script ./src/install-zinit.sh "install zinit"
+
+# install script4vps
+run-script ./src/install-script4vps.sh "install script4vps"
 
 # download script
-wget -N --no-check-certificate -O shadowsocks-all.sh "https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh"
-wget -N --no-check-certificate -O linux-netspeed.sh "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"
-wget -N --no-check-certificate -O v2ray.sh "https://install.direct/go.sh"
-chmod +x $USER_HOME/*.sh
-git clone https://github.com/LomotHo/script4vps.git $SCRIPT4VPS_HOME
-# cp -r $USER_HOME/script4vps/dotfile $DOT_FILE_HOME
+run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
 
 # add ssh key
-# check if $USER_HOME/.ssh exist
-if [ ! -d "$USER_HOME/.ssh" ]; then
-  echo "no $USER_HOME/.ssh, mkdir $USER_HOME/.ssh, chmod it to 700"
-  mkdir $USER_HOME/.ssh
-  chmod 700 $USER_HOME/.ssh
-else
-  echo "$USER_HOME/.ssh existed, chmod it to 700"
-  chmod 700 $USER_HOME/.ssh
-fi
-echo "******copy new authorized_keys******"
-cp $VPS_CONFIG_HOME/authorized_keys $USER_HOME/.ssh
-chmod 600 $USER_HOME/.ssh/authorized_keys
+run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
 
+# install docker
+run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
 
-# install tmux, zsh config
-# git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_HOME"
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-syntax-highlighting
-# # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-autosuggestions
-# ln -s $VPS_CONFIG_HOME/vps.omz.zshrc $USER_HOME/.zshrc
-mkdir ${ZINIT_HOME}
-git clone https://github.com/zdharma/zinit.git ${ZINIT_HOME}/bin
-ln -s ${VPS_CONFIG_HOME}/vps.zinit.zshrc ${USER_HOME}/.zshrc
-ln -s ${VPS_CONFIG_HOME}/vps.p10k.zsh ${USER_HOME}/.p10k.zsh
-ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
-ln -s $VPS_CONFIG_HOME/vps.vimrc $USER_HOME/.vimrc
-ln -s $VPS_CONFIG_HOME/vps.gitconfig $USER_HOME/.gitconfig
+# final work
+run-script ${SCRIPT4VPS_HOME}/src/final.sh "final work"
 
-
-chsh -s $(which zsh)
-zsh
+cd ${USER_HOME}
+exec su ${USER_NAME}
