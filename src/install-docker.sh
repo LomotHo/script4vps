@@ -8,4 +8,5 @@ systemctl start docker
 systemctl enable docker
 groupadd docker
 gpasswd -a $USER_NAME docker
-# newgrp docker
+log-info "newgrp docker"
+# sudo -u ${USER_NAME} newgrp docker
