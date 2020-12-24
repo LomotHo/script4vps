@@ -99,6 +99,7 @@ log-info "chsh"
 sudo -u ${USER_NAME} chsh -s $(which zsh)
 log-info "newgrp docker"
 sudo -u ${USER_NAME} newgrp docker
+exec su ${USER_NAME}
 
 # log-warn "exec: chsh -s $(which zsh)"
 # log-warn "exec: newgrp docker"
