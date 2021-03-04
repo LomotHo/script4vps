@@ -2,6 +2,8 @@ if [ -f ~/.profile ]; then
     . ~/.profile
 fi
 
+SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
+
 # alias
 alias qp="git add .; git commit -am 'quick commit'; git push"
 alias dim="docker image"
@@ -26,6 +28,7 @@ alias dcd="docker-compose down"
 alias kcl="kubectl"
 alias kg="kubectl get"
 alias kga="kubectl get all"
+alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
 
 # locale
 export LANG="en_US.UTF-8"
