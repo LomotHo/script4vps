@@ -3,6 +3,7 @@ if [ -f ~/.profile ]; then
 fi
 
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
+precmd () { print -Pn "\e]0;${USER}@${HOST}\a" }
 
 # alias
 alias qp="git add .; git commit -am 'quick commit'; git push"
