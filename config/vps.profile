@@ -30,6 +30,7 @@ alias kcl="kubectl"
 alias kg="kubectl get"
 alias kga="kubectl get all"
 alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
+alias ttr="tcptraceroute"
 
 # locale
 export LANG="en_US.UTF-8"
