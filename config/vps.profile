@@ -6,7 +6,7 @@ SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
 precmd () { print -Pn "\e]0;${USER}@${HOST}\a" }
 
 # alias
-alias qp="bash ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
+alias qp="source ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
 alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
 alias ttr="tcptraceroute"
 
