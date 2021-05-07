@@ -6,7 +6,10 @@ SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
 precmd () { print -Pn "\e]0;${USER}@${HOST}\a" }
 
 # alias
-alias qp="git add .; git commit -am 'quick commit'; git push"
+alias qp="bash ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
+alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
+alias ttr="tcptraceroute"
+
 alias dim="docker image"
 alias dco="docker container"
 
@@ -29,8 +32,6 @@ alias dcd="docker-compose down"
 alias kcl="kubectl"
 alias kg="kubectl get"
 alias kga="kubectl get all"
-alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
-alias ttr="tcptraceroute"
 
 # locale
 export LANG="en_US.UTF-8"
