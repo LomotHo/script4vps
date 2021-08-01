@@ -6,7 +6,7 @@ SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${USER_HOME}/.script4vps}
 VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
 
 ## download script4vps
-git clone https://gitee.com/lomot/script4vps.git ${SCRIPT4VPS_HOME}
+git clone https://git.lomot.top/lomot/script4vps.git ${SCRIPT4VPS_HOME}
 
 ## install tmux, zsh config
 log-info "install config"
