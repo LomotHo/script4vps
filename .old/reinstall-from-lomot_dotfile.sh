@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone https://github.com/LomotHo/script4vps.git ~/.script4vps
+git clone https://git.lomot.top/lomot/script4vps.git ~/.script4vps
 rm -rf ~/.lomot_dotfile
 rm ~/.tmux.conf
 rm ~/.zshrc
