@@ -30,8 +30,13 @@ alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 
 alias kcl="kubectl"
+alias k="kubectl"
 alias kg="kubectl get"
 alias kga="kubectl get all"
+alias ka="kubectl apply"
+alias kd="kubectl delete"
+alias kaf="kubectl apply -f"
+alias kdf="kubectl delete -f"
 
 ### locale
 export LANG="en_US.UTF-8"
