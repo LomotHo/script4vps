@@ -83,13 +83,13 @@ run-script ./src/install-script4vps.sh "install script4vps"
 # run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
 
 # add ssh key
-run-script ${SCRIPT4VPS_HOME}/src/add-ssh-key.sh "add ssh key"
+run-script ./src/add-ssh-key.sh "add ssh key"
 
 # install docker
-run-script ${SCRIPT4VPS_HOME}/src/install-docker.sh "install docker"
+run-script ./src/install-docker.sh "install docker"
 
 # final work
-run-script ${SCRIPT4VPS_HOME}/src/final.sh "final work"
+run-script ./src/final.sh "final work"
 
 cd ${USER_HOME}
 exec su ${USER_NAME}
