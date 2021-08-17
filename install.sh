@@ -91,5 +91,5 @@ run-script ./src/install-docker.sh "install docker"
 # final work
 run-script ./src/final.sh "final work"
 
-cd ${USER_HOME}
-exec su ${USER_NAME}
+# cd ${USER_HOME}
+# exec su ${USER_NAME}
