@@ -6,7 +6,6 @@ ZINIT_HOME=${ZINIT_HOME:-${USER_HOME}/.zinit}
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${USER_HOME}/.script4vps}
 VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
 
-
 ## install zinit
 mkdir ${ZINIT_HOME}
 git clone https://gitee.com/lomot/zinit.git ${ZINIT_HOME}/bin
