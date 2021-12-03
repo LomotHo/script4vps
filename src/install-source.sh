@@ -20,7 +20,7 @@ SOURCE_LIST_HOME=${SOURCE_LIST_HOME:-./china-source}
 case ${OS} in
 ubuntu)
     case ${OS_VERSION} in
-    "20.04" | "18.04" | "16.04" | "14.04")
+    "22.04" | "20.04" | "18.04" | "16.04" | "14.04")
         mv /etc/apt/sources.list /etc/apt/sources.list.ori
         cp ${SOURCE_LIST_HOME}/ubuntu${OS_VERSION}.sources.list /etc/apt/sources.list
         ;;
@@ -31,7 +31,7 @@ ubuntu)
     ;;
 debian)
     case ${OS_VERSION} in
-    "10" | "9")
+    "11" | "10" | "9")
         mv /etc/apt/sources.list /etc/apt/sources.list.ori
         cp ${SOURCE_LIST_HOME}/debian${OS_VERSION}.sources.list /etc/apt/sources.list
         ;;
