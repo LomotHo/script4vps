@@ -9,5 +9,5 @@ VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
 
 ## install zinit
 mkdir ${ZINIT_HOME}
-git clone https://github.com/zdharma/zinit.git ${ZINIT_HOME}/bin
+git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT_HOME}/bin
 ln -s ${VPS_CONFIG_HOME}/vps.zinit.zshrc ${USER_HOME}/.zshrc
