@@ -53,7 +53,7 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 # # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$OMZ_HOME/custom}/plugins/zsh-autosuggestions
 # ln -s $VPS_CONFIG_HOME/vps.omz.zshrc $USER_HOME/.zshrc
 mkdir ${ZINIT_HOME}
-git clone https://github.com/zdharma/zinit.git ${ZINIT_HOME}/bin
+git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT_HOME}/bin
 ln -s ${VPS_CONFIG_HOME}/vps.zinit.zshrc ${USER_HOME}/.zshrc
 ln -s ${VPS_CONFIG_HOME}/vps.p10k.zsh ${USER_HOME}/.p10k.zsh
 ln -s $VPS_CONFIG_HOME/vps.tmux.conf $USER_HOME/.tmux.conf
