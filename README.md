@@ -1,21 +1,24 @@
 # script4vps
-please replace the file ```config/authorized_keys``` & ```config/vps.gitconfig``` frist !!!
 
+please replace the file `config/authorized_keys` & `config/vps.gitconfig` frist !!!
 
 ---
 
 ## ubuntu or debian
+
 ```bash
 # apt install ca-certificates
 git clone https://git.lomot.top/lomot/script4vps.git
 cd script4vps
-USER_NAME=lomot bash install.sh
-# USER_NAME=lomot bash install.sh -cn
+bash install.sh -cn
+# USER_NAME=lomot bash install.sh
 # ./start.sh -cn
 ```
 
 ## for root
+
 ### openvz
+
 ```bash
 git clone https://git.lomot.top/lomot/script4vps.git
 cd script4vps
@@ -23,6 +26,7 @@ cd script4vps
 ```
 
 ### kvm
+
 ```bash
 git clone https://git.lomot.top/lomot/script4vps.git
 cd script4vps
@@ -30,6 +34,7 @@ cd script4vps
 ```
 
 ### reinstall from lomot_dotfile
+
 ```bash
 git clone https://git.lomot.top/lomot/script4vps.git ~/.script4vps
 cd .script4vps/old
