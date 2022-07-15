@@ -7,7 +7,9 @@ please replace the file `config/authorized_keys` & `config/vps.gitconfig` frist 
 ## ubuntu or debian
 
 ```bash
-# apt install ca-certificates
+# apt-get update
+# apt-get install apt-transport-https ca-certificates -y
+# update-ca-certificates
 git clone https://git.lomot.top/lomot/script4vps.git
 cd script4vps
 bash install.sh -cn
