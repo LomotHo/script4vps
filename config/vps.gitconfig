@@ -3,3 +3,5 @@
 	email = lomot@qq.com
 [core]
 	editor = vim
+[credential]
+	helper = store
