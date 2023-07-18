@@ -28,14 +28,18 @@ alias dls='docker image ls; \
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 
-alias kcl="kubectl"
 alias k="kubectl"
 alias kg="kubectl get"
 alias kga="kubectl get all"
+alias kd="kubectl describe"
 alias ka="kubectl apply"
-alias kd="kubectl delete"
 alias kaf="kubectl apply -f"
+alias kc="kubectl create"
+alias kcf="kubectl create -f"
+alias krm="kubectl delete"
 alias kdf="kubectl delete -f"
+alias kx="kubectx"
+alias ken="kubens"
 
 ### locale
 export LANG="en_US.UTF-8"
