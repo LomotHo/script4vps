@@ -61,7 +61,7 @@ export GOPROXY=https://goproxy.cn,direct
 export GO111MODULE=on
 export GOROOT=/opt/go
 GOPATH=$HOME/go
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 # export PATH=$PATH:$GOROOT/bin
 
 # ls color
