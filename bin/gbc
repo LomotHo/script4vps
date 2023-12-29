@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# 设置错误时退出
+set -e
+
+# 初始化变量
+dry_run=false
+force=false
+
+# 显示帮助信息
+show_help() {
+    echo "用法: $0 [-d|--dry-run] [-f|--force]"
+    echo "选项:"
+    echo "  -d, --dry-run    显示将要删除的分支而不实际删除"
+    echo "  -f, --force      强制删除分支（使用 git branch -D）"
+    echo "  -h, --help       显示此帮助信息"
+}
+
+# 解析命令行参数
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    -d | --dry-run)
+        dry_run=true
+        shift
+        ;;
+    -f | --force)
+        force=true
+        shift
+        ;;
+    -h | --help)
+        show_help
+        exit 0
+        ;;
+    *)
+        echo "错误: 未知的选项 $1"
+        show_help
+        exit 1
+        ;;
+    esac
+done
+
+# 首先切换到 main 分支
+git checkout -q main
+
+# 显示模式信息
+if [ "$force" = true ]; then
+    echo "启用强制删除模式"
+fi
+
+# 获取所有本地分支
+git for-each-ref refs/heads/ "--format=%(refname:short)" |
+    while read branch; do
+        # 跳过 main 分支
+        [ "$branch" = "main" ] && continue
+
+        # 获取分支最后更新时间
+        last_commit_date=$(git log -1 --format="%ai" $branch)
+
+        # 找到当前分支与 main 分支的共同祖先提交
+        mergeBase=$(git merge-base main $branch)
+
+        # 检查分支是否已经被合并到 main
+        if [[ $(git cherry main \
+            $(git commit-tree \
+                $(git rev-parse "$branch^{tree}") \
+                -p $mergeBase \
+                -m _)) == "-"* ]]; then
+
+            if [ "$dry_run" = true ]; then
+                echo "[DRY-RUN] 将删除分支: $branch (最后更新: $last_commit_date)"
+            else
+                echo "删除分支: $branch (最后更新: $last_commit_date)"
+                if [ "$force" = true ]; then
+                    git branch -D "$branch"
+                else
+                    git branch -d "$branch"
+                fi
+            fi
+        fi
+    done
+
+echo "清理完成"
