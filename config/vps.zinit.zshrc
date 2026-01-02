@@ -54,4 +54,21 @@ zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
+  export AGENT_MODE=true
+else
+  export AGENT_MODE=false
+fi
+
+if [[ "$AGENT_MODE" != "true" ]]; then
+
+  # 加载 powerlevel10k 主题
+  zinit ice depth=1;
+  zinit light romkatv/powerlevel10k
+
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
 source ${VPS_CONFIG_HOME}/vps.profile
