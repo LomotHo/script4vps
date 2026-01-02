@@ -42,10 +42,45 @@ done
 # 首先切换到 main 分支
 git checkout -q main
 
+# 清理远端已删除的分支引用
+echo "同步远端分支..."
+git fetch --prune -q
+
 # 显示模式信息
 if [ "$force" = true ]; then
     echo "启用强制删除模式"
 fi
+
+# 函数：检查分支是否已合并到 main
+is_merged() {
+    local branch=$1
+
+    # 方法1：检查普通 merge（分支是 main 的祖先）
+    if git merge-base --is-ancestor "$branch" main 2>/dev/null; then
+        return 0
+    fi
+
+    # 方法2：检查 rebase merge（每个提交都有等效提交在 main 上）
+    # git cherry 返回 + 表示未合并，- 表示已合并
+    # 如果没有任何 + 开头的行，说明所有提交都已合并
+    if ! git cherry main "$branch" 2>/dev/null | grep -q '^+'; then
+        return 0
+    fi
+
+    # 方法3：检查 squash merge（分支的整体更改作为单个提交合并）
+    local mergeBase
+    mergeBase=$(git merge-base main "$branch" 2>/dev/null) || return 1
+
+    # 创建临时提交，代表分支相对于 merge-base 的所有更改
+    local tempCommit
+    tempCommit=$(git commit-tree "$(git rev-parse "$branch^{tree}")" -p "$mergeBase" -m _)
+
+    if [[ $(git cherry main "$tempCommit" 2>/dev/null) == "-"* ]]; then
+        return 0
+    fi
+
+    return 1
+}
 
 # 获取所有本地分支
 git for-each-ref refs/heads/ "--format=%(refname:short)" |
@@ -53,19 +88,16 @@ git for-each-ref refs/heads/ "--format=%(refname:short)" |
         # 跳过 main 分支
         [ "$branch" = "main" ] && continue
 
+        # 只处理 feat/, fix/, chore/ 前缀的分支
+        case "$branch" in
+            feat/*|fix/*|chore/*) ;;
+            *) continue ;;
+        esac
+
         # 获取分支最后更新时间
-        last_commit_date=$(git log -1 --format="%ai" $branch)
+        last_commit_date=$(git log -1 --format="%ai" "$branch")
 
-        # 找到当前分支与 main 分支的共同祖先提交
-        mergeBase=$(git merge-base main $branch)
-
-        # 检查分支是否已经被合并到 main
-        if [[ $(git cherry main \
-            $(git commit-tree \
-                $(git rev-parse "$branch^{tree}") \
-                -p $mergeBase \
-                -m _)) == "-"* ]]; then
-
+        if is_merged "$branch"; then
             if [ "$dry_run" = true ]; then
                 echo "[DRY-RUN] 将删除分支: $branch (最后更新: $last_commit_date)"
             else
