@@ -3,7 +3,7 @@
 #fi
 
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
-precmd () { print -Pn "\e]0;${USER}@${HOST}\a" }
+precmd () { print -Pn "\e]0;${USER}@${HOST}\a"; }
 
 # alias
 alias qp="source ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
@@ -73,3 +73,4 @@ export PATH=$PATH:$CONDA_HOME/bin
 PATH=$PATH:~/.local/bin
 
 export PATH="${SCRIPT4VPS_HOME}/bin:$PATH"
+export PATH="${HOME}/.local/bin:${PATH}"
