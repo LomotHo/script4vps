@@ -74,6 +74,6 @@ docker run -it script4vps-test
 ```bash
 docker run -it --rm --name script4vps-test -v "$(pwd)":/opt/script4vps ubuntu:24.04 bash
 cd /opt/script4vps
-USER_NAME=testuser bash install.sh --modules base,user,shell --cn
+bash install.sh --user testuser --modules base,user,shell --cn --theme container
 su - testuser
 ```
