@@ -1,16 +1,16 @@
 #!/bin/bash
+set -e
 
-source ./src/lib/color-log.sh
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "${SCRIPT_DIR}/lib/common.sh"
 
-log-info "uninstall script4vps"
+log-info "Uninstalling script4vps..."
 
-rm ~/.p10k.zsh
-rm ~/.tmux.conf
-rm ~/.zshrc
-rm ~/.vimrc
-rm ~/.gitconfig
-rm -rf ~/.zinit
-rm -rf ~/.oh-my-zsh
+rm -f ~/.zshrc
+rm -f ~/.p10k.zsh
+rm -f ~/.tmux.conf
+rm -f ~/.vimrc
+rm -f ~/.gitconfig
 rm -rf ~/.script4vps
 
-log-info "uninstall OK"
+log-info "Uninstall complete. You may want to run: chsh -s /bin/bash"

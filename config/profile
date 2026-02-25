@@ -1,0 +1,64 @@
+SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
+
+precmd () { print -Pn "\e]0;${USER}@${HOST}\a"; }
+
+### aliases — docker
+alias dim="docker image"
+alias dco="docker container"
+alias dimg="docker image"
+alias dcon="docker container"
+alias datt="docker attach"
+alias drun="docker run"
+alias dls='docker image ls; \
+    echo "===================================================="; \
+    docker ps -a --format "table {{.Image}}\t{{.Status}}\t{{.Ports}}\t{{.Names}}"'
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+
+### aliases — kubernetes
+alias k="kubectl"
+alias kg="kubectl get"
+alias kga="kubectl get all"
+alias kd="kubectl describe"
+alias ka="kubectl apply"
+alias kaf="kubectl apply -f"
+alias kc="kubectl create"
+alias kcf="kubectl create -f"
+alias krm="kubectl delete"
+alias kdf="kubectl delete -f"
+alias kx="kubectx"
+alias ken="kubens"
+
+### aliases — utils
+alias qp="source ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
+alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
+alias ttr="tcptraceroute"
+
+### locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+### JAVA
+JAVA_HOME=/opt/jdk
+JRE_HOME=/opt/jdk/jre
+CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+export JAVA_HOME JRE_HOME CLASS_PATH
+
+### nodejs
+NODE_HOME=/opt/nodejs
+PATH=$PATH:$NODE_HOME/bin
+
+### golang
+export GOPROXY=https://goproxy.cn,direct
+export GO111MODULE=on
+export GOROOT=/opt/go
+GOPATH=$HOME/go
+PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+### conda
+CONDA_HOME=${HOME}/miniconda3
+export PATH=$PATH:$CONDA_HOME/bin
+
+### script4vps bin + local bin
+export PATH="${SCRIPT4VPS_HOME}/bin:${HOME}/.local/bin:${PATH}"

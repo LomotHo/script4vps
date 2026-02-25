@@ -1,0 +1,36 @@
+SCRIPT4VPS_HOME="${HOME}/.script4vps"
+V="${SCRIPT4VPS_HOME}/vendor"
+
+autoload -Uz is-at-least
+
+# OMZ core libs
+for f in history completion key-bindings theme-and-appearance grep; do
+  source "${V}/omz/lib/${f}.zsh"
+done
+
+# OMZ plugins
+for f in colored-man-pages sudo common-aliases git; do
+  source "${V}/omz/plugins/${f}/${f}.plugin.zsh"
+done
+
+# Completions
+autoload -Uz compinit && compinit
+
+# Agent mode detection (CI / non-interactive)
+if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
+  export AGENT_MODE=true
+else
+  export AGENT_MODE=false
+fi
+
+if [[ "$AGENT_MODE" != "true" ]]; then
+  # Syntax highlighting
+  source "${V}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+  # Powerlevel10k theme
+  source "${V}/powerlevel10k/powerlevel10k.zsh-theme"
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
+# Profile (aliases, PATH, env)
+source "${SCRIPT4VPS_HOME}/config/profile"
