@@ -9,6 +9,13 @@ log-error() { echo -e "\033[31m[error] $1\033[0m"; }
 
 # --- Utilities ---
 
+# Use sudo only when not root
+if [[ "$(id -u)" -eq 0 ]]; then
+    SUDO=""
+else
+    SUDO="sudo"
+fi
+
 run-module() {
     local script="$1" label="$2"
     log-info ">>> ${label}"

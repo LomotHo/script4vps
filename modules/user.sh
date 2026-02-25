@@ -4,8 +4,8 @@
 if id "$USER_NAME" &>/dev/null; then
     log-info "User $USER_NAME already exists, skipping creation"
 else
-    adduser --disabled-password --gecos "" "$USER_NAME"
+    $SUDO adduser --disabled-password --gecos "" "$USER_NAME"
     log-info "User $USER_NAME created"
 fi
 
-usermod -aG sudo "$USER_NAME"
+$SUDO usermod -aG sudo "$USER_NAME"

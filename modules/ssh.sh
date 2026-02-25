@@ -10,6 +10,10 @@ chmod 700 "$SSH_DIR"
 
 cp "${SCRIPT4VPS_HOME}/config/authorized_keys" "${SSH_DIR}/authorized_keys"
 chmod 600 "${SSH_DIR}/authorized_keys"
-chown -R "${USER_NAME}:${USER_NAME}" "$SSH_DIR"
+
+# Set ownership (skip if installing for current user)
+if [[ "$USER_NAME" != "$(whoami)" ]]; then
+    $SUDO chown -R "${USER_NAME}:${USER_NAME}" "$SSH_DIR"
+fi
 
 log-info "SSH key deployed to ${SSH_DIR}/authorized_keys"

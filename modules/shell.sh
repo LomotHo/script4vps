@@ -55,9 +55,11 @@ if [[ -f "$XZ_FILE" && ! -f "$BIN_FILE" ]]; then
     log-info "Extracted gitstatusd for ${ARCH}"
 fi
 
-# Set ownership
-chown -R "${USER_NAME}:${USER_NAME}" "$USER_HOME"
+# Set ownership (skip if installing for current user)
+if [[ "$USER_NAME" != "$(whoami)" ]]; then
+    $SUDO chown -R "${USER_NAME}:${USER_NAME}" "$USER_HOME"
+fi
 
-# Switch default shell to zsh (usermod works without PAM, unlike chsh)
-usermod -s "$(which zsh)" "${USER_NAME}"
+# Switch default shell to zsh
+$SUDO usermod -s "$(which zsh)" "${USER_NAME}"
 log-info "Default shell set to zsh for ${USER_NAME}"

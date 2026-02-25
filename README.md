@@ -7,25 +7,28 @@ Personal terminal configuration & VPS initialization toolkit.
 ## Quick Start
 
 ```bash
-git clone --recursive --shallow-submodules https://git.lomot.top/lomot/script4vps.git
+git clone https://git.lomot.top/lomot/script4vps.git
 cd script4vps
-sudo bash install.sh
+bash install.sh
 ```
 
 ## Usage
 
 ```bash
-# Install all modules (base, user, shell, ssh, docker)
-sudo bash install.sh
+# Install default modules (base, shell) for current user
+bash install.sh
 
-# Install specific modules only
-sudo bash install.sh --modules shell,docker
+# Install all modules
+bash install.sh --modules base,shell,ssh,docker
 
-# Specify a different username (default: lomot)
-sudo USER_NAME=myuser bash install.sh
+# Specify a different username
+bash install.sh --user lomot
 
 # Use China mirrors
-sudo bash install.sh --cn
+bash install.sh --cn
+
+# Select theme (vps, mac, ascii)
+bash install.sh --theme ascii
 
 # List available modules
 bash install.sh --list
@@ -36,10 +39,11 @@ bash install.sh --list
 | Module   | Description                                                  |
 | -------- | ------------------------------------------------------------ |
 | `base`   | Install essential packages (htop, vim, tmux, zsh, git, curl) |
-| `user`   | Create user and grant sudo                                   |
 | `shell`  | Deploy zsh/tmux/vim/git configs, set zsh as default          |
 | `ssh`    | Deploy SSH authorized_keys                                   |
 | `docker` | Install Docker and configure user access                     |
+
+> When `--user` specifies a different user, it will be created automatically.
 
 ## Uninstall
 
@@ -74,6 +78,6 @@ docker run -it script4vps-test
 ```bash
 docker run -it --rm --name script4vps-test -v "$(pwd)":/opt/script4vps ubuntu:24.04 bash
 cd /opt/script4vps
-bash install.sh --user testuser --modules base,user,shell --cn --theme container
+bash install.sh --user testuser --modules base,shell --cn --theme ascii
 su - testuser
 ```
