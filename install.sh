@@ -7,6 +7,7 @@ source "${SCRIPT_DIR}/lib/common.sh"
 ALL_MODULES=(base user shell ssh docker)
 SELECTED_MODULES=()
 USER_NAME="${USER_NAME:-lomot}"
+THEME="${THEME:-vps}"
 USE_CN=false
 
 show_help() {
@@ -15,12 +16,14 @@ Usage: $0 [options]
 
 Options:
   --modules <m1,m2,...>  Install specific modules (default: all)
-  --list                 List available modules
+  --theme <name>         Set p10k theme: vps, mac, container (default: vps)
+  --list                 List available modules and themes
   --user <name>          Set target username (default: lomot)
   --cn                   Use China mirrors where applicable
   -h, --help             Show this help
 
 Available modules: ${ALL_MODULES[*]}
+Available themes:  vps (pure style), mac (rainbow nerdfont), container (ASCII only)
 EOF
 }
 
@@ -42,6 +45,10 @@ while [[ $# -gt 0 ]]; do
         --list)
             list_modules
             exit 0
+            ;;
+        --theme)
+            THEME="$2"
+            shift 2
             ;;
         --user)
             USER_NAME="$2"
@@ -70,10 +77,11 @@ fi
 require-root
 detect-os
 
-export SCRIPT_DIR USER_NAME USE_CN
+export SCRIPT_DIR USER_NAME THEME USE_CN
 
 log-info "OS detected: ${OS_ID} ${OS_VERSION}"
 log-info "Target user: ${USER_NAME}"
+log-info "Theme: ${THEME}"
 log-info "Modules: ${SELECTED_MODULES[*]}"
 echo ""
 

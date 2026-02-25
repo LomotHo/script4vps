@@ -18,10 +18,19 @@ else
     fi
 fi
 
+# Validate theme
+THEME="${THEME:-vps}"
+THEME_FILE="${CONFIG_HOME}/themes/${THEME}.p10k.zsh"
+if [[ ! -f "$THEME_FILE" ]]; then
+    log-error "Theme not found: ${THEME} (looked for ${THEME_FILE})"
+    exit 1
+fi
+log-info "Using theme: ${THEME}"
+
 # Symlink config files (remove existing targets first)
 declare -A LINKS=(
     ["${USER_HOME}/.zshrc"]="${CONFIG_HOME}/zshrc"
-    ["${USER_HOME}/.p10k.zsh"]="${CONFIG_HOME}/p10k.zsh"
+    ["${USER_HOME}/.p10k.zsh"]="${THEME_FILE}"
     ["${USER_HOME}/.tmux.conf"]="${CONFIG_HOME}/tmux.conf"
     ["${USER_HOME}/.vimrc"]="${CONFIG_HOME}/vimrc"
     ["${USER_HOME}/.gitconfig"]="${CONFIG_HOME}/gitconfig"

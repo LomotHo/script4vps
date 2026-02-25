@@ -48,11 +48,10 @@
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     context                 # user@host
-    dir                       # current directory
-    vcs                       # git status
-    # command_execution_time  # previous command duration
-    # virtualenv              # python virtual environment
-    prompt_char               # prompt symbol
+    kubecontext             # current kubernetes context
+    dir                     # current directory
+    vcs                     # git status
+    prompt_char             # prompt symbol
   )
 
   # Right prompt segments.
@@ -145,6 +144,20 @@
   typeset -g POWERLEVEL9K_VCS_{COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=1
   # Remove space between '⇣' and '⇡' and all trailing spaces.
   typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${${${P9K_CONTENT/⇣* :⇡/⇣⇡}// }//:/ }'
+
+  #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
+  # Kubernetes context classes for the purpose of using different colors and icons.
+  typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
+      '*prod*'  PROD
+      '*test*'  TEST
+      '*'       DEFAULT)
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=$cyan
+  typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=$yellow
+  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_FOREGROUND=$red
+  # Show cluster name and namespace (omit "default" namespace).
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION=
+  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
+  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Grey current time.
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=$grey
