@@ -1,95 +1,98 @@
 #!/bin/bash
+set -e
 
-# the new user can not be root
-USER_NAME=${USER_NAME:-lomot}
-USER_HOME=${USER_HOME:-/home/$USER_NAME}
-ZINIT_HOME=${ZINIT_HOME:-${USER_HOME}/.zinit}
-SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${USER_HOME}/.script4vps}
-VPS_CONFIG_HOME=${VPS_CONFIG_HOME:-${USER_HOME}/.script4vps/config}
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "${SCRIPT_DIR}/lib/common.sh"
 
-OS=$(
-    source /etc/os-release
-    echo $ID
-)
-OS_VERSION=$(
-    source /etc/os-release
-    echo $VERSION_ID
-)
-SOURCE_LIST_HOME=${SOURCE_LIST_HOME:-./src/china-source}
+ALL_MODULES=(base user shell ssh docker)
+SELECTED_MODULES=()
+USER_NAME="${USER_NAME:-lomot}"
+THEME="${THEME:-vps}"
+USE_CN=false
 
-# import lib
-source ./src/lib/color-log.sh
-source ./src/lib/util.sh
+show_help() {
+    cat <<EOF
+Usage: $0 [options]
 
-# check OS
-case $OS in
-ubuntu)
-    log-info "OS is ubuntu"
-    ;;
-debian)
-    log-info "OS is debian"
-    ;;
-*)
-    log-error "$OS OS not support"
-    exit 1
-    ;;
-esac
+Options:
+  --modules <m1,m2,...>  Install specific modules (default: all)
+  --theme <name>         Set p10k theme: vps, mac, container (default: vps)
+  --list                 List available modules and themes
+  --user <name>          Set target username (default: lomot)
+  --cn                   Use China mirrors where applicable
+  -h, --help             Show this help
 
-# check if $USER is root
-case $USER in
-root) ;;
+Available modules: ${ALL_MODULES[*]}
+Available themes:  vps (pure style), mac (rainbow nerdfont), container (ASCII only)
+EOF
+}
 
-*)
-    log-error "This script must be run as root!"
-    exit 1
-    ;;
-esac
+list_modules() {
+    log-info "Available modules:"
+    echo "  base   - Install essential packages (htop, vim, tmux, zsh, git, curl)"
+    echo "  user   - Create user and grant sudo"
+    echo "  shell  - Deploy zsh/tmux/vim/git configs, set default shell to zsh"
+    echo "  ssh    - Deploy SSH authorized_keys"
+    echo "  docker - Install Docker and configure user access"
+}
 
-# # add swap
-# run-script ./src/addswap/512M.sh "add swap"
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --modules)
+            IFS=',' read -ra SELECTED_MODULES <<< "$2"
+            shift 2
+            ;;
+        --list)
+            list_modules
+            exit 0
+            ;;
+        --theme)
+            THEME="$2"
+            shift 2
+            ;;
+        --user)
+            USER_NAME="$2"
+            shift 2
+            ;;
+        --cn|-cn)
+            USE_CN=true
+            shift
+            ;;
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        *)
+            log-error "Unknown option: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+done
 
-# check if China
-case ${1} in
-"-cn")
-    # install china source
-    log-info "chinese vps"
-    run-script ./src/install-source.sh "install china source"
-    ;;
-*)
-    log-info "not chinese vps"
-    ;;
-esac
+if [[ ${#SELECTED_MODULES[@]} -eq 0 ]]; then
+    SELECTED_MODULES=("${ALL_MODULES[@]}")
+fi
 
-# install software
-run-script ./src/install-software.sh "install software"
+require-root
+detect-os
 
-# add user
-run-script ./src/add-user.sh "add user: ${USER_NAME}"
+export SCRIPT_DIR USER_NAME THEME USE_CN
 
-# install zinit
-case ${1} in
-"-cn")
-    run-script ./src/install-zinit-cn.sh "install zinit"
-    ;;
-*)
-    run-script ./src/install-zinit.sh "install zinit"
-    ;;
-esac
+log-info "OS detected: ${OS_ID} ${OS_VERSION}"
+log-info "Target user: ${USER_NAME}"
+log-info "Theme: ${THEME}"
+log-info "Modules: ${SELECTED_MODULES[*]}"
+echo ""
 
-# install script4vps
-run-script ./src/install-script4vps.sh "install script4vps"
+for mod in "${SELECTED_MODULES[@]}"; do
+    mod_script="${SCRIPT_DIR}/modules/${mod}.sh"
+    if [[ ! -f "$mod_script" ]]; then
+        log-error "Module not found: ${mod}"
+        exit 1
+    fi
+    run-module "$mod_script" "module: ${mod}"
+done
 
-# download script
-# run-script ${SCRIPT4VPS_HOME}/src/download-script.sh "download scripts"
-
-# add ssh key
-run-script ./src/add-ssh-key.sh "add ssh key"
-
-# install docker
-run-script ./src/install-docker.sh "install docker"
-
-# final work
-run-script ./src/final.sh "final work"
-
-# cd ${USER_HOME}
-# exec su ${USER_NAME}
+echo ""
+log-info "All done! Log in as ${USER_NAME} to enjoy your new shell."
