@@ -7,7 +7,7 @@ Personal terminal configuration & VPS initialization toolkit.
 ## Quick Start
 
 ```bash
-git clone --recursive https://github.com/lomot/script4vps.git
+git clone --recursive --shallow-submodules https://git.lomot.top/lomot/script4vps.git
 cd script4vps
 sudo bash install.sh
 ```

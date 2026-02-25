@@ -44,12 +44,13 @@ for target in "${!LINKS[@]}"; do
 done
 
 # Decompress gitstatusd for current architecture
-GITSTATUS_DIR="${SCRIPT4VPS_HOME}/vendor/powerlevel10k/gitstatus/usrbin"
+GITSTATUS_BIN_DIR="${SCRIPT4VPS_HOME}/vendor/gitstatus-bin"
+GITSTATUS_USRBIN_DIR="${SCRIPT4VPS_HOME}/vendor/powerlevel10k/gitstatus/usrbin"
 ARCH=$(uname -m)
-XZ_FILE="${GITSTATUS_DIR}/gitstatusd-linux-${ARCH}.xz"
-BIN_FILE="${GITSTATUS_DIR}/gitstatusd-linux-${ARCH}"
+XZ_FILE="${GITSTATUS_BIN_DIR}/gitstatusd-linux-${ARCH}.xz"
+BIN_FILE="${GITSTATUS_USRBIN_DIR}/gitstatusd-linux-${ARCH}"
 if [[ -f "$XZ_FILE" && ! -f "$BIN_FILE" ]]; then
-    xz -dk "$XZ_FILE"
+    xz -dkc "$XZ_FILE" > "$BIN_FILE"
     chmod +x "$BIN_FILE"
     log-info "Extracted gitstatusd for ${ARCH}"
 fi
