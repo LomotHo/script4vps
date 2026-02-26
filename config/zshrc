@@ -5,7 +5,8 @@ V="${SCRIPT4VPS_HOME}/vendor"
 ZSH_CACHE_DIR="${HOME}/.cache/zsh"
 [[ -d "$ZSH_CACHE_DIR/completions" ]] || mkdir -p "$ZSH_CACHE_DIR/completions"
 
-autoload -Uz is-at-least
+autoload -Uz is-at-least compinit
+compinit -d "$ZSH_CACHE_DIR/.zcompdump"
 
 # OMZ core libs (load all)
 for f in "${V}"/omz/lib/*.zsh; do
@@ -19,9 +20,6 @@ while IFS= read -r plugin || [[ -n "$plugin" ]]; do
   [[ -z "$plugin" ]] && continue
   source "${V}/omz/plugins/${plugin}/${plugin}.plugin.zsh"
 done < "${SCRIPT4VPS_HOME}/config/enabled_plugins.txt"
-
-# Completions (use cache dir to avoid cluttering home)
-autoload -Uz compinit && compinit -d "$ZSH_CACHE_DIR/.zcompdump"
 
 # Agent mode detection (CI / non-interactive)
 if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
