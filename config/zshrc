@@ -3,15 +3,18 @@ V="${SCRIPT4VPS_HOME}/vendor"
 
 autoload -Uz is-at-least
 
-# OMZ core libs
-for f in history completion key-bindings theme-and-appearance grep; do
-  source "${V}/omz/lib/${f}.zsh"
+# OMZ core libs (load all)
+for f in "${V}"/omz/lib/*.zsh; do
+  source "$f"
 done
 
-# OMZ plugins
-for f in colored-man-pages sudo common-aliases git; do
-  source "${V}/omz/plugins/${f}/${f}.plugin.zsh"
-done
+# OMZ plugins (from config file)
+while IFS= read -r plugin || [[ -n "$plugin" ]]; do
+  plugin="${plugin%%#*}"        # strip comments
+  plugin="${plugin// /}"        # strip spaces
+  [[ -z "$plugin" ]] && continue
+  source "${V}/omz/plugins/${plugin}/${plugin}.plugin.zsh"
+done < "${SCRIPT4VPS_HOME}/config/enabled_plugins.txt"
 
 # Completions
 autoload -Uz compinit && compinit

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
 
 precmd () { print -Pn "\e]0;${USER}@${HOST}\a"; }
