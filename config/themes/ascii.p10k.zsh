@@ -64,7 +64,7 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     per_directory_history   # Oh My Zsh per-directory-history local/global indicator
-    time                    # current time
+    # time                    # current time
   )
 
   typeset -g POWERLEVEL9K_MODE=ascii
