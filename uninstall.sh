@@ -6,6 +6,7 @@ source "${SCRIPT_DIR}/lib/common.sh"
 
 log-info "Uninstalling script4vps..."
 
+rm -f ~/.zshenv
 rm -f ~/.zshrc
 rm -f ~/.p10k.zsh
 rm -f ~/.tmux.conf

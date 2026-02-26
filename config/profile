@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SCRIPT4VPS_HOME=${SCRIPT4VPS_HOME:-${HOME}/.script4vps}
 
 precmd () { print -Pn "\e]0;${USER}@${HOST}\a"; }
@@ -30,8 +32,8 @@ alias kx="kubectx"
 alias ken="kubens"
 
 ### aliases — utils
-alias qp="source ${SCRIPT4VPS_HOME}/config/utils/qp.sh"
-alias setproxy="source ${SCRIPT4VPS_HOME}/config/utils/setproxy.sh"
+alias qp="${SCRIPT4VPS_HOME}/bin/qp"
+alias setproxy="source ${SCRIPT4VPS_HOME}/bin/setproxy"
 alias ttr="tcptraceroute"
 
 ### locale

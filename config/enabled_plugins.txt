@@ -1,0 +1,12 @@
+# OMZ plugins to load
+# Lines starting with # are comments
+
+colored-man-pages
+sudo
+common-aliases
+git
+docker
+extract
+helm
+kubectl
+z

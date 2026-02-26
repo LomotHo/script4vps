@@ -1,0 +1,3 @@
+# Prevent Ubuntu's /etc/zsh/zshrc from calling compinit
+# (we handle it ourselves in .zshrc with a custom dump path)
+skip_global_compinit=1

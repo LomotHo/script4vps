@@ -1,20 +1,26 @@
 SCRIPT4VPS_HOME="${HOME}/.script4vps"
 V="${SCRIPT4VPS_HOME}/vendor"
 
-autoload -Uz is-at-least
+# OMZ cache directory (needed by some plugins)
+ZSH_CACHE_DIR="${HOME}/.cache/zsh"
+[[ -d "$ZSH_CACHE_DIR/completions" ]] || mkdir -p "$ZSH_CACHE_DIR/completions"
+fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
-# OMZ core libs
-for f in history completion key-bindings theme-and-appearance grep; do
-  source "${V}/omz/lib/${f}.zsh"
+autoload -Uz is-at-least compinit
+compinit -d "$ZSH_CACHE_DIR/.zcompdump"
+
+# OMZ core libs (load all)
+for f in "${V}"/omz/lib/*.zsh; do
+  source "$f"
 done
 
-# OMZ plugins
-for f in colored-man-pages sudo common-aliases git; do
-  source "${V}/omz/plugins/${f}/${f}.plugin.zsh"
-done
-
-# Completions
-autoload -Uz compinit && compinit
+# OMZ plugins (from config file)
+while IFS= read -r plugin || [[ -n "$plugin" ]]; do
+  plugin="${plugin%%#*}"        # strip comments
+  plugin="${plugin// /}"        # strip spaces
+  [[ -z "$plugin" ]] && continue
+  source "${V}/omz/plugins/${plugin}/${plugin}.plugin.zsh"
+done < "${SCRIPT4VPS_HOME}/config/enabled_plugins.txt"
 
 # Agent mode detection (CI / non-interactive)
 if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then

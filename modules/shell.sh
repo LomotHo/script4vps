@@ -29,6 +29,7 @@ log-info "Using theme: ${THEME}"
 
 # Symlink config files (remove existing targets first)
 declare -A LINKS=(
+    ["${USER_HOME}/.zshenv"]="${CONFIG_HOME}/zshenv"
     ["${USER_HOME}/.zshrc"]="${CONFIG_HOME}/zshrc"
     ["${USER_HOME}/.p10k.zsh"]="${THEME_FILE}"
     ["${USER_HOME}/.tmux.conf"]="${CONFIG_HOME}/tmux.conf"
