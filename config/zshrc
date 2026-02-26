@@ -4,6 +4,7 @@ V="${SCRIPT4VPS_HOME}/vendor"
 # OMZ cache directory (needed by some plugins)
 ZSH_CACHE_DIR="${HOME}/.cache/zsh"
 [[ -d "$ZSH_CACHE_DIR/completions" ]] || mkdir -p "$ZSH_CACHE_DIR/completions"
+fpath=("$ZSH_CACHE_DIR/completions" $fpath)
 
 autoload -Uz is-at-least compinit
 compinit -d "$ZSH_CACHE_DIR/.zcompdump"
